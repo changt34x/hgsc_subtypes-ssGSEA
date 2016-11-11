@@ -1,11 +1,14 @@
-############################################
-# Cross-population analysis of high-grade serous ovarian cancer reveals only two robust subtypes
+###############################################
+# ssGSEA testing for ovarian cancer
 #
-# Way, G.P., Rudd, J., Wang, C., Hamidi, H., Fridley, L.B,  
-# Konecny, G., Goode, E., Greene, C.S., Doherty, J.A.
-# ~~~~~~~~~~~~~~~~~~~~~
-# This script will load the data required for all downstream analyses. 
-# Each script that requires data will source() this script.
+# Chang, T
+# ~~~~~~~~~~~~
+# This scipt loads required HGSC data.
+#
+# References:
+# Way, G.P., Rudd, J., Wang, C., Hamidi, H., Fridley, L.B, Konecny, G., Goode, E., C.S., Doherty, J.A. (2016).
+# Unpublished: Cross-population analysis of high-grade serious ovarian cancer does not support four subtypes.
+###############################################
 
 ############################################
 # Load Libraries

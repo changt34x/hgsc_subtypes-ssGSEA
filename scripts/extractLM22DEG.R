@@ -13,7 +13,7 @@
 lm22_genes <- read.csv('data/raw/LM22_DEG.csv', header = T, row.names = 1)
 
 # Read common genes data
-common_genes <- read.csv('data/raw/CommonGenes_genelist.csv', header = T, row.names = 1)
+common_genes <- read.csv('data/Genes/CommonGenes_genelist.csv', header = T, row.names = 1)
 
 # Gene selection
 lm22Row <- rownames(lm22_genes)

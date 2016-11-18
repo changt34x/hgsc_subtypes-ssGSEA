@@ -77,7 +77,7 @@ for (dataset in 1:length(ExpData)) {
 }
 
 ############################
-# 4. Aggregate analysis
+# 4. Aggregate analysis (Cell Type x Dataset)
 ############################
 # Get aggregate dataframe
 agg_data <- ssGSEA_Aggregate_Table(args, dim(clustering)[2])
@@ -102,6 +102,61 @@ for (i in 2:(dim(clustering)[2] + 1)) {
     sel <- agg_data$K == i & agg_data$Cell.Type == current_type
     
     # Plot and save as
+    ggplot(data = agg_data[sel,], mapping = aes(x = as.character(agg_data$Subtype[sel]), 
+                                                y = agg_data$ssGSEA[sel], 
+                                                fill = agg_data$Dataset[sel])) +
+      geom_boxplot() +
+      labs(title = paste0("lm22: ", current_type, " (K = ", i, ")"), x = "Subtype", 
+           y = "Abundance") +
+      guides(fill = guide_legend(title="Dataset"))
+    
+    ggsave(filename = paste0(output_dir, '/', current_type, '_k=', i, '.png'),
+           plot = last_plot())
+  }
+}
+
+############################
+# 5. Aggregate analysis (Dataset x Cell Type)
+############################
+# Plot data
+for (dataset in 1:length(ExpData)) {
+  dataset_name <- names(ExpData)[dataset]
+  
+  output_dir <- paste0('output/figures/', dataset_name, '/summary')
+  dir.create(output_dir, showWarnings = F)
+  
+  for (i in 2:(dim(clustering)[2] + 1)) {
+    for (j in 1:i) {
+      # Select data from table
+      sel <- agg_data$K == i & agg_data$Dataset == dataset_name & agg_data$Subtype == j
+      
+      # Plot and save as png
+      ggplot(data = agg_data[sel,], mapping = aes(x = agg_data$Cell.Type[sel],
+                                                  y = agg_data$ssGSEA[sel])) +
+        geom_boxplot() +
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(title = paste0(dataset_name, " (K = ", i, ", Subtype = ", j, ")"),
+             x = "Cell Type", y = "Abundance")
+      
+      ggsave(filename = paste0(output_dir, '/', dataset_name, '_k=', i, '_s=', j, '.png'),
+             plot = last_plot())
+    }
+  }
+}
+
+for (i in 2:(dim(clustering)[2] + 1)) {
+  # Create output directory by subtyping number
+  output_dir <- paste0('output/figures/lm22_overall/k=', i)
+  dir.create(output_dir, showWarnings = F)
+  
+  for (j in 1:length(cell_types)) {
+    # Get cell type
+    current_type <- cell_types[j]
+    
+    # Select data from table
+    sel <- agg_data$K == i & agg_data$Cell.Type == current_type
+    
+    # Plot and save as png
     ggplot(data = agg_data[sel,], mapping = aes(x = as.character(agg_data$Subtype[sel]), 
                                                 y = agg_data$ssGSEA[sel], 
                                                 fill = agg_data$Dataset[sel])) +

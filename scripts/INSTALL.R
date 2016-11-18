@@ -7,9 +7,14 @@
 # required tools.
 ###############################################
 
+# Install standard R packages
 mirror <- "http://cran.us.r-project.org"
-packages <- c("rJava","xlsx")
-install.packages(packages, repos = mirror)
+packages <- c("rJava","xlsx", "estimate")
+install.packages(packages, repos = mirror, dependencies = T)
+
+# Install Estimate
+rforge <- "http://r-forge.r-project.org"
+install.packages("estimate", repos=rforge, dependencies=TRUE)
 
 ###############################################
 # Install BioConductor Tools

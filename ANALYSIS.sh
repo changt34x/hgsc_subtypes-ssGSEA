@@ -45,3 +45,10 @@ Rscript --vanilla scripts/extractLM22DEG.R
 ################
 R --no-save --args $DATA1 $DATA2 $DATA3 $DATA4 $DATA5 \
 < scripts/ssGSEA.R
+
+################
+# Part 4:
+# Run ESTIMATE
+################
+R --no-save --args $DATA1 $DATA2 $DATA3 $DATA4 $DATA5 \
+< scripts/ESTIMATE.R

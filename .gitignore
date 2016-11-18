@@ -1,0 +1,8 @@
+*.png
+*.gct
+*.tsv
+
+# Copyrighted data
+/data/lm22_genes.tsv
+/data/raw/LM22_DEG.csv
+/data/raw/Newmanetal2015_suptables1.xls
